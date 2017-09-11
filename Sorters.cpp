@@ -112,3 +112,44 @@ void merge(vector<int> &vt, int from, int mid, int to){
 }
 
 
+
+//HeapSort----------------------------------------------------------------------------------------------
+
+void heapSort(vector<int> &vt){
+    for(int i=((int)vt.size()-1)/2; i>=0; i--){ //init: turning input array to max heap
+        heapify(vt, i, (int)vt.size());
+    }
+    
+    int lastIndex = (int)vt.size()-1; //virtual last index for max heap
+    while(lastIndex>=0){ //extract the biggest(first) element until all have been extracted/sorted
+        int tmp = vt[0];
+        vt[0] = vt[lastIndex];
+        vt[lastIndex--] = tmp;
+        //lastIndex--;
+        heapify(vt, 0, lastIndex+1);
+    }
+}
+
+/*helper method that turns input array or subarray into max heap
+ *(vt[root] considered first element while vt[size-1] considered last element in array) 
+ */
+void heapify(vector<int> &vt, int root, int size){ 
+    int left = (root*2)+1;
+    int right = (root*2)+2;
+    int largest = root;
+    
+
+    if(left<=size-1 && vt[largest]<vt[left]){ //when value at left is larger than that at largest
+        largest = left;
+    }
+    if(right<=size-1 && vt[largest]<vt[right]){ //when value at right is larger than the one at (current)largest
+        largest = right;
+    }
+    
+    if(largest!=root){ //if root is not largest, switch them and heapify the affected subtree
+        int tmp = vt[root];
+        vt[root] = vt[largest];
+        vt[largest] = tmp;
+        heapify(vt, largest, size);
+    }
+}
