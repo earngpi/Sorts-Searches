@@ -20,4 +20,7 @@ void mergeSort(vector<int> &vt);
 void mergeSort(vector<int> &vt, int from, int to);
 void merge(vector<int> &vt, int from, int mid, int to);
 
+void heapSort(vector<int> &vt);
+void heapify(vector<int> &vt, int index, int size);
+
 #endif /* Sorters_hpp */
